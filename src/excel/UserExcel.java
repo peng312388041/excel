@@ -59,7 +59,7 @@ public class UserExcel {
 	public static Workbook getSourceWorkbook() {
 		InputStream inputStream = null;
 		try {
-			inputStream = new FileInputStream(new File("D:/source.xls"));
+			inputStream = new FileInputStream(new File("D:/source2.xls"));
 			sourceWorkbook = Workbook.getWorkbook(inputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -90,8 +90,9 @@ public class UserExcel {
 
 		String string[] = setLittle.toArray(new String[] {});
 		Arrays.sort(string);
-		List<String> listBig = new ArrayList<String>(Arrays.asList(string));
-		return listBig;
+		List<String> listLittle = new ArrayList<String>(Arrays.asList(string));
+		listLittle.remove(listLittle.size() - 1);
+		return listLittle;
 	}
 
 	public static List<String> getSetMiddle(Workbook sourceWorkbook) {
@@ -105,8 +106,9 @@ public class UserExcel {
 
 		String string[] = setMiddle.toArray(new String[] {});
 		Arrays.sort(string);
-		List<String> listBig = new ArrayList<String>(Arrays.asList(string));
-		return listBig;
+		List<String> listMiddle = new ArrayList<String>(Arrays.asList(string));
+		listMiddle.remove(listMiddle.size() - 1);
+		return listMiddle;
 	}
 
 	public static List<String> getSetBig(Workbook sourceWorkbook) {
@@ -121,6 +123,7 @@ public class UserExcel {
 		String string[] = setBig.toArray(new String[] {});
 		Arrays.sort(string);
 		List<String> listBig = new ArrayList<String>(Arrays.asList(string));
+		listBig.remove(listBig.size() - 1);
 		return listBig;
 	}
 
@@ -231,7 +234,7 @@ public class UserExcel {
 		for (int i = 1; i < 4; i++) {
 			Sheet sourceSheet = sourceWorkbook.getSheet(i);
 			// 对每一行进行遍历
-			for (int j = 0; j < sourceSheet.getRows(); j++) {
+			for (int j = 1; j < sourceSheet.getRows(); j++) {
 				Cell row[] = sourceSheet.getRow(j);
 				String bigId = row[3].getContents();
 				String middleId = row[5].getContents();
